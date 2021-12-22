@@ -1,13 +1,31 @@
-class LengthMetaClass(type):
-    length = 10
+class IncreasingList:
+    l = []
+    def append(self, val):
+        [x for x in reversed(self.l) if x <= val]
+        self.l.append(val)
+
+    def pop(self):
+        if self.l:
+            self.l.pop()
+        else:
+            pass
+
     def __len__(self):
-        return self.clslength()
+        return str(self.l)
 
 
-class IncreasingList(object, metaclass=LengthMetaClass):
-    @classmethod
-    def clslength(cls):
-        return cls.length
-
-a = IncreasingList
-print(len(a))
+if __name__ == '__main__':
+    lst = IncreasingList()
+    q = int(input())
+    for _ in range(q):
+        op = input().split()
+        op_name = op[0]
+        if op_name == "append":
+            val = int(op[1])
+            lst.append(val)
+        elif op_name == "pop":
+            lst.pop()
+        elif op_name == "size":
+            print(op_name)
+        else:
+            raise ValueError("invalid operation")
